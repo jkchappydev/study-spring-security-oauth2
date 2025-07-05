@@ -3,6 +3,7 @@ package com.studyspringsecurityoauth2;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
+/*
 public class CustomSecurityConfigurer extends AbstractHttpConfigurer<CustomSecurityConfigurer, HttpSecurity> {
 
     private boolean isSecure;
@@ -30,3 +31,4 @@ public class CustomSecurityConfigurer extends AbstractHttpConfigurer<CustomSecur
     }
 
 }
+*/
