@@ -8,7 +8,7 @@ spring:
         registration:
           keycloak:
             client-id: oauth2-client-app
-            client-secret: 8p0CimPZZlSVy1j9SQb4C00T1XqTToKJ
+            client-secret: AoMzGoVdOy0a0nykBpEvFtUpTfJjzfXM
             client-name: oauth2-client-app
             redirect-uri: http://localhost:8081/login/oauth2/code/keycloak
             authorization-grant-type: authorization_code

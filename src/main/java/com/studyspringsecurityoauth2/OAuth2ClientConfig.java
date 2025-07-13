@@ -16,7 +16,9 @@ public class OAuth2ClientConfig {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                 //        .requestMatchers("/loginPage").permitAll()
-                        .anyRequest().authenticated())
+                //        .anyRequest().authenticated()
+                                .anyRequest().permitAll()
+                )
                 // .oauth2Login(oauth2 -> oauth2.loginPage("/loginPage")); // 커스텀 로그인 페이지
                 .oauth2Login(Customizer.withDefaults()); // 디폴트 로그인 페이지
 
