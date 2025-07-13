@@ -15,8 +15,10 @@ public class OAuth2ClientConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                //        .requestMatchers("/loginPage").permitAll()
                         .anyRequest().authenticated())
-                .oauth2Login(Customizer.withDefaults());
+                // .oauth2Login(oauth2 -> oauth2.loginPage("/loginPage")); // 커스텀 로그인 페이지
+                .oauth2Login(Customizer.withDefaults()); // 디폴트 로그인 페이지
 
         return http.build();
     }
