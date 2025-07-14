@@ -1,31 +1,16 @@
 package com.studyspringsecurityoauth2;
 
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
-import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 public class IndexController {
-
-    // 사용자 엔드포인트를 알고 싶으면 ClientRegistrationRepository
-    private final ClientRegistrationRepository clientRegistrationRepository;
-
-    public IndexController(ClientRegistrationRepository clientRegistrationRepository) {
-        this.clientRegistrationRepository = clientRegistrationRepository;
-    }
 
     @GetMapping("/")
     public String index() {
@@ -34,47 +19,28 @@ public class IndexController {
 
     // 표준 방식
     @GetMapping("/user")
-    public OAuth2User user(String accessToken) {
-        ClientRegistration clientRegistration = clientRegistrationRepository.findByRegistrationId("keycloak");// 사용자 엔드포인트
+    public OAuth2User user(Authentication auth) {
+        // 직접 SecurityContext 로 부터 인증객체를 가져온다.
+        // OAuth2AuthenticationToken authentication1 = (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 
-        OAuth2AccessToken oAuth2AccessToken =
-                new OAuth2AccessToken(OAuth2AccessToken.TokenType.BEARER, accessToken, Instant.now(), Instant.MAX);
+        // 메서드에 선언된 참조를 가져온다.
+        OAuth2AuthenticationToken authentication2 = (OAuth2AuthenticationToken) auth;
+        return authentication2.getPrincipal();
+    }
 
-        OAuth2UserRequest oAuth2UserRequest =
-                new OAuth2UserRequest(clientRegistration, oAuth2AccessToken);
-
-        // 표준 방식으로 인가서버와 통신을 하는 서비스를 정의
-        DefaultOAuth2UserService defaultOAuth2UserService = new DefaultOAuth2UserService();
-
-        OAuth2User oAuth2User = defaultOAuth2UserService.loadUser(oAuth2UserRequest);
-
+    // 어노테이션 방식
+    @GetMapping("/oauth2User")
+    public OAuth2User oAuth2User(@AuthenticationPrincipal OAuth2User oAuth2User) {
+        System.out.println("oAuth2User = " + oAuth2User);
         return oAuth2User;
     }
 
-    // OIDC 방식
-    @GetMapping("/oidc")
-    public OAuth2User oidc(String accessToken, String idToken) {
-        ClientRegistration clientRegistration = clientRegistrationRepository.findByRegistrationId("keycloak"); // 사용자 엔드포인트
-
-        OAuth2AccessToken oAuth2AccessToken =
-                new OAuth2AccessToken(OAuth2AccessToken.TokenType.BEARER, accessToken, Instant.now(), Instant.MAX);
-
-        Map<String, Object> idTokenClaims = new HashMap<>();
-        idTokenClaims.put(IdTokenClaimNames.ISS, "http://localhost:8080/realms/oauth2"); // 원래 인가서버로 부터 알아서 세팅
-        idTokenClaims.put(IdTokenClaimNames.SUB, "OIDC0"); // 표준이 sub임
-        idTokenClaims.put("preferred_username", "user");
-
-        OidcIdToken oidcIdToken = new OidcIdToken(idToken, Instant.now(), Instant.MAX, idTokenClaims);
-
-        OidcUserRequest oidcUserRequest =
-                new OidcUserRequest(clientRegistration, oAuth2AccessToken, oidcIdToken);
-
-        // OIDC 방식으로 인가서버와 통신을 하는 서비스를 정의
-        OidcUserService oidcUserService = new OidcUserService();
-
-        OAuth2User oAuth2User = oidcUserService.loadUser(oidcUserRequest);
-
-        return oAuth2User;
+    // oidc 방식
+    // OidcUser 는 OAuth2User 를 상속받기 때문에, OAuth2User 로도 참조가 가능하지만 명확하게 작성하는 것이 좋다.
+    @GetMapping("/oidcUser")
+    public OidcUser oidcUser(@AuthenticationPrincipal OidcUser oidcUser) {
+        System.out.println("oAuth2User = " + oidcUser);
+        return oidcUser;
     }
 
 }
