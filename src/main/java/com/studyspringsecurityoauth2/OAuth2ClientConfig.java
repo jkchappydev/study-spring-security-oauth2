@@ -14,9 +14,16 @@ public class OAuth2ClientConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .anyRequest().authenticated())
-                // .oauth2Login(Customizer.withDefaults())
-                .oauth2Client(Customizer.withDefaults());
+                        .requestMatchers("/home", "/client").permitAll()
+                        .anyRequest().authenticated())
+                // 스프링 시큐리티 6은 5에 비해서 더 엄격한 규칙 적용 (따라서 이렇게 명시해야함)
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/client")
+                )
+                .oauth2Client(Customizer.withDefaults())
+
+                .logout(logout -> logout.logoutSuccessUrl("/home"))
+        ;
 
         return http.build();
     }

@@ -6,7 +6,7 @@ spring:
     oauth2:
       client:
         registration:
-          keycloak1:
+          keycloak:
             client-id: oauth2-client-app
             client-secret: AoMzGoVdOy0a0nykBpEvFtUpTfJjzfXM
             client-name: oauth2-client-app
