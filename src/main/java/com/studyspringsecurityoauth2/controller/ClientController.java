@@ -1,4 +1,4 @@
-package com.studyspringsecurityoauth2;
+package com.studyspringsecurityoauth2.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
