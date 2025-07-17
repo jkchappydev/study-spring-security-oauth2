@@ -21,7 +21,6 @@ public class OAuth2ClientConfig {
                         .defaultSuccessUrl("/client")
                 )
                 .oauth2Client(Customizer.withDefaults())
-                .logout(logout -> logout.logoutSuccessUrl("/home"))
         ;
 
         return http.build();

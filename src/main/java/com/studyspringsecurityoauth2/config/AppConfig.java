@@ -1,7 +1,9 @@
 package com.studyspringsecurityoauth2.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProvider;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProviderBuilder;
@@ -13,7 +15,7 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepo
 public class AppConfig {
 
     @Bean
-    public OAuth2AuthorizedClientManager auth2AuthorizedClientManager(
+    public DefaultOAuth2AuthorizedClientManager auth2AuthorizedClientManager(
             ClientRegistrationRepository clientRegistrationRepository, // 클라이언트 등록 정보 저장소
             OAuth2AuthorizedClientRepository authorizedClientRepository // 인증된 클라이언트 저장소
     ) {
