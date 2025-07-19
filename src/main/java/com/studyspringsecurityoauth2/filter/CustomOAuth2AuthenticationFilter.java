@@ -7,7 +7,9 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizationSuccessHandler;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
@@ -28,6 +30,7 @@ import java.time.Clock;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class CustomOAuth2AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -96,9 +99,13 @@ public class CustomOAuth2AuthenticationFilter extends AbstractAuthenticationProc
             OAuth2User oauth2User = oAuth2UserService.loadUser(new OAuth2UserRequest(
                     authorizedClient.getClientRegistration(), accessToken));
 
+            SimpleAuthorityMapper authorityMapper = new SimpleAuthorityMapper();
+            authorityMapper.setPrefix("SYSTEM_");
+            Set<GrantedAuthority> grantedAuthorities = authorityMapper.mapAuthorities(oauth2User.getAuthorities());
+
             OAuth2AuthenticationToken authResult = new OAuth2AuthenticationToken(
                     oauth2User,
-                    authentication.getAuthorities(),
+                    grantedAuthorities,
                     authorizedClient.getClientRegistration().getRegistrationId()
             );
 
