@@ -11,6 +11,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 
+import java.time.Duration;
+
 @Configuration
 public class AppConfig {
 
@@ -25,7 +27,7 @@ public class AppConfig {
                         .authorizationCode() // 권장 방식: Authorization Code Grant
                         // .password() - Spring Security 5.8부터 deprecated
                         .clientCredentials() // 클라이언트 자격 증명 방식 (서버 간 통신 등에서 사용)
-                        .refreshToken() // Refresh Token 을 통한 재인증 지원
+                        .refreshToken(refreshTokenGrantBuilder -> refreshTokenGrantBuilder.clockSkew(Duration.ofSeconds(3600L))) // Refresh Token 을 통한 재인증 지원
                         .build();
 
         // DefaultOAuth2AuthorizedClientManager 생성 (인증 클라이언트를 관리)
