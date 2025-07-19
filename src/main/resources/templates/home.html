@@ -8,9 +8,11 @@
   <title>Insert title here</title>
 </head>
 <body>
-<div>Welcome <p> <span th:text = "${oAuth2AuthenticationToken}"/></p></div>
-<div><p>Access Token:  <span th:text = "${AccessToken}"/></p></div>
-<div><p>Refresh Token:  <span th:text = "${RefreshToken}"/></p></div>
+<div>Welcome <p><span th:text = "${oAuth2AuthenticationToken}"/></p></div>
+<div>Access Token: <p><span th:text = "${AccessToken}"/></p></div>
+<div>Refresh Token: <p><span th:text = "${RefreshToken}"/></p></div>
+
 <div sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></div>
+
 </body>
 </html>
