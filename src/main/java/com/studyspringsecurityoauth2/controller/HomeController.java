@@ -23,7 +23,9 @@ public class HomeController {
 
         model.addAttribute("oAuth2AuthenticationToken", oAuth2AuthenticationToken);
         model.addAttribute("AccessToken", oAuth2AuthorizedClient.getAccessToken().getTokenValue());
-        model.addAttribute("RefreshToken", oAuth2AuthorizedClient.getRefreshToken().getTokenValue());
+        if(oAuth2AuthorizedClient.getRefreshToken() != null) { // client credentials 방식은 refresh token 미발급
+            model.addAttribute("RefreshToken", oAuth2AuthorizedClient.getRefreshToken().getTokenValue());
+        }
 
         return "home";
     }

@@ -26,7 +26,7 @@ public class OAuth2ClientConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/","/oauth2Login","/client").permitAll()
+                        .requestMatchers("/","/oauth2Login","/v2/oauth2Login","/client").permitAll()
                         .anyRequest().authenticated())
                 .oauth2Login(oauth2 -> oauth2
                         .defaultSuccessUrl("/client")
