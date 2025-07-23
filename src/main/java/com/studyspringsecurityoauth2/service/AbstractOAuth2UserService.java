@@ -1,18 +1,13 @@
 package com.studyspringsecurityoauth2.service;
 
-import com.studyspringsecurityoauth2.converters.ProviderUserConverter;
-import com.studyspringsecurityoauth2.converters.ProviderUserRequest;
+import com.studyspringsecurityoauth2.common.converters.ProviderUserConverter;
+import com.studyspringsecurityoauth2.common.converters.ProviderUserRequest;
 import com.studyspringsecurityoauth2.model.*;
-import com.studyspringsecurityoauth2.model.social.GoogleUser;
-import com.studyspringsecurityoauth2.model.social.KeycloakUser;
-import com.studyspringsecurityoauth2.model.social.NaverUser;
 import com.studyspringsecurityoauth2.model.users.User;
 import com.studyspringsecurityoauth2.repository.UserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 // 2

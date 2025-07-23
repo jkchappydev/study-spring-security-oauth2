@@ -1,5 +1,6 @@
 package com.studyspringsecurityoauth2.model;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -10,11 +11,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Data
 public abstract class OAuth2ProviderUser implements ProviderUser {
 
-    private final Map<String, Object> attributes;
-    private final OAuth2User oAuth2User;
-    private final ClientRegistration clientRegistration;
+    private Map<String, Object> attributes;
+    private OAuth2User oAuth2User;
+    private ClientRegistration clientRegistration;
 
     public OAuth2ProviderUser(Map<String, Object> attributes, OAuth2User oauth2User, ClientRegistration clientRegistration) {
         this.attributes = attributes;

@@ -1,7 +1,8 @@
 package com.studyspringsecurityoauth2.service;
 
-import com.studyspringsecurityoauth2.converters.ProviderUserConverter;
-import com.studyspringsecurityoauth2.converters.ProviderUserRequest;
+import com.studyspringsecurityoauth2.common.converters.ProviderUserConverter;
+import com.studyspringsecurityoauth2.common.converters.ProviderUserRequest;
+import com.studyspringsecurityoauth2.model.PrincipalUser;
 import com.studyspringsecurityoauth2.model.ProviderUser;
 import com.studyspringsecurityoauth2.repository.UserRepository;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -40,7 +41,7 @@ public class CustomOidcUserService extends AbstractOAuth2UserService implements 
         // 회원가입
         super.register(providerUser, userRequest);
 
-        return oidcUser;
+        return new PrincipalUser(providerUser);
     }
 
 }
