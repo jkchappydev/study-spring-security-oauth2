@@ -15,7 +15,7 @@ public class IndexController {
     // 인증 받은 사용자 접근 가능
     @GetMapping("/")
     public String index(Model model, Authentication authentication, @AuthenticationPrincipal PrincipalUser principalUser) { // 이제 OAuth2User 가 아니라 PrincipalUser 이다.
-        // 인증객체를 구현체 타입으로 변환
+        // 인증객체를 구현체 타입으로 변환.
         // OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
         /*if (oAuth2AuthenticationToken != null) {
             Map<String, Object> attributes = oauth2User.getAttributes();
