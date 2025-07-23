@@ -27,11 +27,26 @@ public class CustomOidcUserService extends AbstractOAuth2UserService implements 
 
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
-        ClientRegistration clientRegistration = userRequest.getClientRegistration();
+        // ClientRegistration clientRegistration = userRequest.getClientRegistration();
+
+        // OAuth2 공급자마다 사용자 고유 식별자의 키 이름이 다르기 때문에 작성
+        // ClientRegistration 의 속성을 다 가져온 다음 추가적으로 속성을 설정 할 수 있음.
+        // oidc 는 기본적으로 "sub" 사용함
+        ClientRegistration clientRegistration = ClientRegistration.withClientRegistration(userRequest.getClientRegistration())
+                .userNameAttributeName("sub") // 이 필드가 getName()의 기준이 됨
+                .build();
+
+        // OidcUserRequest 를 재정의 해야한다. (위에서 변경된 속성을 가지는 clientRegistration 이 아닌 이전 상태를 가지고 있기 때문에)
+        OidcUserRequest oidcUserRequest = new OidcUserRequest(
+                clientRegistration,
+                userRequest.getAccessToken(),
+                userRequest.getIdToken(),
+                userRequest.getAdditionalParameters()
+        );
 
         // OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService = new OidcUserService();
         OidcUserService oidcUserService = new OidcUserService();
-        OidcUser oidcUser = oidcUserService.loadUser(userRequest);
+        OidcUser oidcUser = oidcUserService.loadUser(oidcUserRequest);
 
         // 2
         // ProviderUser providerUser = super.providerUser(clientRegistration, oidcUser);
@@ -39,7 +54,7 @@ public class CustomOidcUserService extends AbstractOAuth2UserService implements 
         ProviderUser providerUser = super.providerUser(providerUserRequest);
 
         // 회원가입
-        super.register(providerUser, userRequest);
+        super.register(providerUser, oidcUserRequest);
 
         return new PrincipalUser(providerUser);
     }

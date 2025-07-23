@@ -21,7 +21,8 @@ public class DelegatingProviderUserConverter implements ProviderUserConverter<Pr
                         new UserDetailsProviderUserConverter(), // 폼인증이 제일 먼저 (registrationId 가 없음)
                         new OAuth2GoogleProviderUserConverter(),
                         new OAuth2NaverProviderUserConverter(),
-                        new OAuth2KakaoProviderUserConverter()
+                        new OAuth2KakaoProviderUserConverter(),
+                        new OAuth2KakaoOidcProviderUserConverter()
                 );
 
         this.converters = Collections.unmodifiableList(new LinkedList<>(providerUserConverters));

@@ -8,7 +8,6 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 // 각각의 서비스마다 반환 하는 UserDetails, OAuth2User, OidcUser 반환 타입을 동시에 처리하는 클래스

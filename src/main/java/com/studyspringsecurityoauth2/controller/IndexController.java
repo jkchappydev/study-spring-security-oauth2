@@ -37,6 +37,7 @@ public class IndexController {
             } else { // UserDetails 타입
                 userName = principalUser.providerUser().getUsername();
             }
+
             model.addAttribute("user", userName);
             model.addAttribute("provider", principalUser.providerUser().getProvider());
         }
