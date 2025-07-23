@@ -1,5 +1,6 @@
-package com.studyspringsecurityoauth2.model;
+package com.studyspringsecurityoauth2.model.social;
 
+import com.studyspringsecurityoauth2.model.OAuth2ProviderUser;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 

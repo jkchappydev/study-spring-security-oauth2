@@ -1,6 +1,6 @@
 package com.studyspringsecurityoauth2.repository;
 
-import com.studyspringsecurityoauth2.model.User;
+import com.studyspringsecurityoauth2.model.users.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

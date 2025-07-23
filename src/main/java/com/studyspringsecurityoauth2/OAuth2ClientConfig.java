@@ -33,7 +33,7 @@ public class OAuth2ClientConfig {
                         .requestMatchers("/api/user")
                             .access(AuthorityAuthorizationManager.hasAnyRole("SCOPE_profile", "SCOPE_email"))
                         .requestMatchers("/api/oidc")
-                            .access(AuthorityAuthorizationManager.hasAnyRole("SCOPE_openid"))
+                            .access(AuthorityAuthorizationManager.hasAnyRole("SCOPE_op enid"))
                         .requestMatchers("/").permitAll()
                         .anyRequest().authenticated())
                 .oauth2Login(oauth2 -> oauth2

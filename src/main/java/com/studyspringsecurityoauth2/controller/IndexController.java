@@ -22,11 +22,11 @@ public class IndexController {
             Map<String, Object> attributes = oauth2User.getAttributes();
             String name = (String) attributes.get("name");
 
-            // 네이버 별도 처리
-            if (oAuth2AuthenticationToken.getAuthorizedClientRegistrationId().equals("naver")) {
-                Map<String, Object> response = (Map) attributes.get("response");
-                name = (String) response.get("name");
-            }
+//            // 네이버 별도 처리
+//            if (oAuth2AuthenticationToken.getAuthorizedClientRegistrationId().equals("naver")) {
+//                Map<String, Object> response = (Map) attributes.get("response");
+//                name = (String) response.get("name");
+//            }
             model.addAttribute("user", name);
         }
 

@@ -1,5 +1,7 @@
 package com.studyspringsecurityoauth2.service;
 
+import com.studyspringsecurityoauth2.converters.ProviderUserConverter;
+import com.studyspringsecurityoauth2.converters.ProviderUserRequest;
 import com.studyspringsecurityoauth2.model.ProviderUser;
 import com.studyspringsecurityoauth2.repository.UserRepository;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -14,19 +16,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomOidcUserService extends AbstractOAuth2UserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
 
-    public CustomOidcUserService(UserService userService, UserRepository userRepository) {
+    /*public CustomOidcUserService(UserService userService, UserRepository userRepository) {
         super(userService, userRepository);
+    }*/
+
+    public CustomOidcUserService(UserService userService, UserRepository userRepository, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
+        super(userService, userRepository, providerUserConverter);
     }
 
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
         ClientRegistration clientRegistration = userRequest.getClientRegistration();
 
-        OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService = new OidcUserService();
+        // OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService = new OidcUserService();
+        OidcUserService oidcUserService = new OidcUserService();
         OidcUser oidcUser = oidcUserService.loadUser(userRequest);
 
         // 2
-        ProviderUser providerUser = super.providerUser(clientRegistration, oidcUser);
+        // ProviderUser providerUser = super.providerUser(clientRegistration, oidcUser);
+        ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration, oidcUser);
+        ProviderUser providerUser = super.providerUser(providerUserRequest);
 
         // 회원가입
         super.register(providerUser, userRequest);

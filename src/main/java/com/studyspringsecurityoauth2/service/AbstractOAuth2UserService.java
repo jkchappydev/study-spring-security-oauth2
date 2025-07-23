@@ -1,6 +1,12 @@
 package com.studyspringsecurityoauth2.service;
 
+import com.studyspringsecurityoauth2.converters.ProviderUserConverter;
+import com.studyspringsecurityoauth2.converters.ProviderUserRequest;
 import com.studyspringsecurityoauth2.model.*;
+import com.studyspringsecurityoauth2.model.social.GoogleUser;
+import com.studyspringsecurityoauth2.model.social.KeycloakUser;
+import com.studyspringsecurityoauth2.model.social.NaverUser;
+import com.studyspringsecurityoauth2.model.users.User;
 import com.studyspringsecurityoauth2.repository.UserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +21,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public abstract class AbstractOAuth2UserService {
 
-    private static final String REGISTRATION_GOOGLE = "google";
+    /*private static final String REGISTRATION_GOOGLE = "google";
     private static final String REGISTRATION_NAVER = "naver";
-    private static final String REGISTRATION_KEYCLOAK = "keycloak";
+    private static final String REGISTRATION_KEYCLOAK = "keycloak";*/
 
     // 5
     private final UserService userService;
     private final UserRepository userRepository;
+    private final ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter;
 
     protected void register(ProviderUser providerUser, OAuth2UserRequest userRequest) {
         User user = userRepository.findByUsername(providerUser.getUsername());
@@ -34,7 +41,7 @@ public abstract class AbstractOAuth2UserService {
         }
     }
 
-    protected ProviderUser providerUser(ClientRegistration clientRegistration, OAuth2User oAuth2User) {
+    /*protected ProviderUser providerUser(ClientRegistration clientRegistration, OAuth2User oAuth2User) {
         // 구글, 네이버, 키클록 구분
         String registrationId = clientRegistration.getRegistrationId();
         if (registrationId.equals(REGISTRATION_GOOGLE)) {
@@ -50,6 +57,10 @@ public abstract class AbstractOAuth2UserService {
         }
 
         return null;
+    }*/
+
+    public ProviderUser providerUser(ProviderUserRequest providerUserRequest) {
+        return providerUserConverter.convert(providerUserRequest);
     }
 
 }
