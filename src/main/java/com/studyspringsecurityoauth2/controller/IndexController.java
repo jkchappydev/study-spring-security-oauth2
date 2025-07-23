@@ -29,14 +29,16 @@ public class IndexController {
             model.addAttribute("user", name);
         }*/
 
-        if (authentication != null) {
-            String userName;
+        if (principalUser != null) {
+            String userName =  principalUser.providerUser().getUsername();
 
-            if (authentication instanceof OAuth2AuthenticationToken) { // OAuth2User 또는 OidcUser 타입
+            // 분기 할 필요 없음
+            // 이미 PrincipalUser 에서 (implements UserDetails, OAuth2User, OidcUser) 구분되어서 처리하게 해놓았음
+            /*if (authentication instanceof OAuth2AuthenticationToken) { // OAuth2User 또는 OidcUser 타입
                 userName = OAuth2Utils.oAuth2UserName((OAuth2AuthenticationToken) authentication, principalUser);
             } else { // UserDetails 타입
                 userName = principalUser.providerUser().getUsername();
-            }
+            }*/
 
             model.addAttribute("user", userName);
             model.addAttribute("provider", principalUser.providerUser().getProvider());

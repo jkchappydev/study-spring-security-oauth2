@@ -35,7 +35,8 @@ public class OAuth2Utils {
                 .build();
     }
 
-    public static String oAuth2UserName(OAuth2AuthenticationToken authenticationToken, PrincipalUser principalUser) {
+    // IndexController 참고
+    /*public static String oAuth2UserName(OAuth2AuthenticationToken authenticationToken, PrincipalUser principalUser) {
         String userName;
         String registrationId = authenticationToken.getAuthorizedClientRegistrationId();
         OAuth2User oAuth2User = principalUser.providerUser().getOAuth2User();
@@ -60,6 +61,6 @@ public class OAuth2Utils {
         }
 
         return userName;
-    }
+    }*/
 
 }
