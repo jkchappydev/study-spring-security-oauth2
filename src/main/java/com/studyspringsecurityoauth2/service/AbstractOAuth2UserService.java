@@ -2,7 +2,7 @@ package com.studyspringsecurityoauth2.service;
 
 import com.studyspringsecurityoauth2.common.converters.ProviderUserConverter;
 import com.studyspringsecurityoauth2.common.converters.ProviderUserRequest;
-import com.studyspringsecurityoauth2.model.*;
+import com.studyspringsecurityoauth2.model.ProviderUser;
 import com.studyspringsecurityoauth2.model.users.User;
 import com.studyspringsecurityoauth2.repository.UserRepository;
 import lombok.Getter;

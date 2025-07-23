@@ -1,9 +1,9 @@
 package com.studyspringsecurityoauth2.common.converters;
 
 import com.studyspringsecurityoauth2.common.enums.OAuth2Config;
+import com.studyspringsecurityoauth2.common.util.OAuth2Utils;
 import com.studyspringsecurityoauth2.model.ProviderUser;
 import com.studyspringsecurityoauth2.model.social.NaverUser;
-import com.studyspringsecurityoauth2.common.util.OAuth2Utils;
 
 public class OAuth2NaverProviderUserConverter implements ProviderUserConverter<ProviderUserRequest, ProviderUser> {
 

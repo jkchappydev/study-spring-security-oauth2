@@ -1,9 +1,9 @@
 package com.studyspringsecurityoauth2.common.converters;
 
 import com.studyspringsecurityoauth2.common.enums.OAuth2Config;
+import com.studyspringsecurityoauth2.common.util.OAuth2Utils;
 import com.studyspringsecurityoauth2.model.ProviderUser;
 import com.studyspringsecurityoauth2.model.social.GoogleUser;
-import com.studyspringsecurityoauth2.common.util.OAuth2Utils;
 
 public class OAuth2GoogleProviderUserConverter implements ProviderUserConverter<ProviderUserRequest, ProviderUser> {
 

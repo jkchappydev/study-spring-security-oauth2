@@ -4,7 +4,6 @@ import com.studyspringsecurityoauth2.common.enums.OAuth2Config;
 import com.studyspringsecurityoauth2.common.util.OAuth2Utils;
 import com.studyspringsecurityoauth2.model.ProviderUser;
 import com.studyspringsecurityoauth2.model.social.KakaoUser;
-import com.studyspringsecurityoauth2.model.social.NaverUser;
 
 public class OAuth2KakaoProviderUserConverter implements ProviderUserConverter<ProviderUserRequest, ProviderUser> {
 

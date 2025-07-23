@@ -7,7 +7,6 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.security.Principal;
 import java.util.Map;
 
 public class OAuth2Utils {

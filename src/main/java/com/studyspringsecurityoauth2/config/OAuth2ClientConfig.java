@@ -1,6 +1,5 @@
 package com.studyspringsecurityoauth2.config;
 
-import com.studyspringsecurityoauth2.common.authority.CustomAuthorityMapper;
 import com.studyspringsecurityoauth2.service.CustomOAuth2UserService;
 import com.studyspringsecurityoauth2.service.CustomOidcUserService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.security.authorization.AuthorityAuthorizationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
