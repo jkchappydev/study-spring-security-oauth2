@@ -2,6 +2,9 @@ server:
   port: 8081
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> study/section8
 spring:
   security:
     oauth2:
@@ -17,6 +20,19 @@ spring:
             redirect-uri: http://localhost:8081/login/oauth2/code/keycloak
             provider: keycloak
 
+<<<<<<< HEAD
+=======
+          keycloakWithPKCE:
+            client-id: oauth2-client-app2
+            client-secret: cDc5EgV4BYUbfGz8wIry3MhM4shAWXRH
+            client-name: oauth2-client-app2
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_basic
+            scope: openid, profile
+            redirect-uri: http://localhost:8081/login/oauth2/code/keycloak
+            provider: keycloak
+
+>>>>>>> study/section8
         provider:
           keycloak:
             authorization-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/auth
@@ -24,6 +40,7 @@ spring:
             issuer-uri: http://localhost:8080/realms/oauth2
             user-info-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/userinfo
             jwk-set-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/certs
+<<<<<<< HEAD
             user-name-attribute: preferred_username
 =======
 #spring:
@@ -57,3 +74,6 @@ spring:
 #            jwk-set-uri: http://localhost:8080/realms/oauth2/protocol/openid-connect/certs
 #            user-name-attribute: preferred_username # registration.keycloak.scope ? profile? ??? ??? ? ??.
 >>>>>>> study/section7
+=======
+            user-name-attribute: preferred_username
+>>>>>>> study/section8
